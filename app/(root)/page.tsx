@@ -1,4 +1,10 @@
+import CategoryList from '@/components/shared/CategoryList'
+
 const Page = () => {
-  return <div>Hello World</div>
+  return (
+    <div>
+      <CategoryList />
+    </div>
+  )
 }
 export default Page
