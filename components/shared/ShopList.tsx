@@ -10,7 +10,7 @@ const ShopList = () => {
   const params = useSearchParams()
   const [category, setCategory] = useState('all')
   const [restaurants, setRestaurants] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     params && setCategory(params.get('category') as string)
@@ -18,17 +18,17 @@ const ShopList = () => {
   }, [params])
 
   const getShopList = (category_: String) => {
-    setLoading(true)
+    setLoading(false)
     GlobalApi.GetShops(category_).then((res: any) => {
       setRestaurants(res.restaurants)
-      setLoading(false)
+      setLoading(true)
     })
   }
 
   return (
     <div className="p-5 md:px-14">
       <h2 className="font-bold text-2xl">
-        Popular {category.toUpperCase()} Restaurants
+        Popular {category?.toUpperCase()} Restaurants
       </h2>
       {restaurants && (
         <h2 className="font-bold text-primary">

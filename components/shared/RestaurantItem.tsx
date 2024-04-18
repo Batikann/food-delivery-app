@@ -1,11 +1,15 @@
 import { RestaurantItemType } from '@/lib/types'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const RestaurantItem = ({ restaurant }: { restaurant: RestaurantItemType }) => {
   return (
-    <div className="p-3 hover:scale-105 cursor-pointer">
+    <Link
+      href={`/restaurant/${restaurant.slug}`}
+      className="p-3 hover:scale-105 cursor-pointer"
+    >
       <Image
-        src={restaurant.banner.url}
+        src={restaurant?.banner?.url}
         alt={restaurant.name}
         width={500}
         height={200}
@@ -26,7 +30,7 @@ const RestaurantItem = ({ restaurant }: { restaurant: RestaurantItemType }) => {
           </h2>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 export default RestaurantItem

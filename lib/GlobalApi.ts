@@ -48,7 +48,49 @@ const GetShops = async (category: String) => {
   return result
 }
 
+const GetRestaurantDetails = async (restaurant: string) => {
+  const query = gql`
+    query RestaurantDetails {
+      restaurant(where: { slug: "${restaurant}" }) {
+        aboutUs
+        address
+        banner {
+          url
+        }
+        categories {
+          name
+        }
+        id
+        menu {
+          ... on Menu {
+            id
+            category
+            menuItem {
+              ... on MenuItem {
+                id
+                name
+                description
+                price
+                productImage {
+                  url
+                }
+              }
+            }
+          }
+        }
+        restroType
+        slug
+        workingHours
+        name
+      }
+    }
+  `
+  const result = await request(MASTER_URL, query)
+  return result
+}
+
 export default {
   GetCategories,
   GetShops,
+  GetRestaurantDetails,
 }

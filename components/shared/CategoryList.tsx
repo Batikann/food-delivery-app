@@ -53,7 +53,7 @@ const CategoryList = () => {
       />
       <div className="flex gap-4 overflow-auto scrollbar-hide" ref={listRef}>
         {categoryList &&
-          categoryList.map((category, index) => (
+          categoryList?.map((category, index) => (
             <CategoryListItem
               category={category}
               key={index}
