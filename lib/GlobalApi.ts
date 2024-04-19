@@ -136,10 +136,42 @@ const getUserCart = async (email: string) => {
   return result
 }
 
+const disconnectRestroFromUserCartItem = async (id: string) => {
+  const query = gql`
+    mutation DisconnectRestaurantFromCartItem {
+      updateUserCart(
+        data: { restaurant: { disconnect: true } }
+        where: { id: "${id}" }
+      ) {
+        id
+      }
+      publishManyUserCarts(to: PUBLISHED) {
+        count
+      }
+    }
+  `
+  const result = await request(MASTER_URL, query)
+  return result
+}
+
+const deleteCartItemFromCart = async (id: string) => {
+  const query = gql`
+    mutation DeleteCartItem {
+      deleteUserCart(where: { id: "${id}" }) {
+        id
+      }
+    }
+  `
+  const result = await request(MASTER_URL, query)
+  return result
+}
+
 export default {
   GetCategories,
   GetShops,
   GetRestaurantDetails,
   addToCart,
   getUserCart,
+  disconnectRestroFromUserCartItem,
+  deleteCartItemFromCart,
 }

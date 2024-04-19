@@ -60,6 +60,7 @@ export type RestaurantDetailsType = {
 }
 
 export type CartType = {
+  id: string
   price: number
   email: string
   productDescription: string
