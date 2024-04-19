@@ -12,6 +12,12 @@ import {
 import { useContext, useEffect, useState } from 'react'
 import { CartUpdateContext } from '@/context/CartUpdateContext'
 import GlobalApi from '@/lib/GlobalApi'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import Cart from './Cart'
 
 const Header = () => {
   const [cart, setCart] = useState([])
@@ -40,12 +46,20 @@ const Header = () => {
       </div>
       <div className="flex items-center gap-8">
         <SignedIn>
-          <div className="relative">
-            <span className="absolute -top-3 -right-4 bg-slate-200 text-black font-medium flex p-[2px] px-2  rounded-full text-sm">
-              {cart && cart.length}
-            </span>
-            <ShoppingCart />
-          </div>
+          <Popover>
+            <PopoverTrigger asChild>
+              <div className="relative cursor-pointer">
+                <span className="absolute -top-3 -right-4 bg-slate-200 text-black font-medium flex p-[2px] px-2  rounded-full text-sm">
+                  {cart && cart.length}
+                </span>
+                <ShoppingCart />
+              </div>
+            </PopoverTrigger>
+            <PopoverContent className="w-full">
+              <Cart cart={cart} />
+            </PopoverContent>
+          </Popover>
+
           <UserButton afterSignOutUrl="/" />
         </SignedIn>
         <SignedOut>

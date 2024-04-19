@@ -66,6 +66,13 @@ export type CartType = {
   productImage: string
   productName: string
   slug: string
+  restaurant: {
+    name: string
+    slug: string
+    banner: {
+      url: string
+    }
+  }
 }
 
 export type CartUpdateContextType = {
