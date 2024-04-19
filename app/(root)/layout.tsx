@@ -1,10 +1,20 @@
+'use client'
+
 import Header from '@/components/shared/Header'
+import { CartUpdateContext } from '@/context/CartUpdateContext'
+import { CartUpdateContextType } from '@/lib/types'
+import { useState } from 'react'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const [updateCart, setUpdateCart] = useState<CartUpdateContextType>()
   return (
     <div>
-      <Header />
-      {children}
+      <CartUpdateContext.Provider
+        value={{ updateCart, setUpdateCart } as CartUpdateContextType}
+      >
+        <Header />
+        {children}
+      </CartUpdateContext.Provider>
     </div>
   )
 }

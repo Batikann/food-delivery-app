@@ -1,20 +1,56 @@
 'use client'
 
-import { MenuSection, RestaurantDetailsType, menuItemType } from '@/lib/types'
+import {
+  CartType,
+  MenuSection,
+  RestaurantDetailsType,
+  menuItemType,
+} from '@/lib/types'
 import { Button } from '../ui/button'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { SquarePlus } from 'lucide-react'
+import { useUser } from '@clerk/nextjs'
+import GlobalApi from '@/lib/GlobalApi'
+import { useToast } from '@/components/ui/use-toast'
+import { CartUpdateContext } from '@/context/CartUpdateContext'
 
 const MenuSection = ({ restaurant }: { restaurant: RestaurantDetailsType }) => {
+  const { toast } = useToast()
   const [menuItemList, setMenuList] = useState<MenuSection[]>([])
-
+  const { user } = useUser()
+  const { updateCart, setUpdateCart } = useContext(CartUpdateContext)
   const filterMenu = (category: string) => {
     const result = restaurant?.menu?.filter(
       (item) => item?.category === category
     )
     setMenuList(result)
-    console.log(result[0])
+  }
+
+  const addToCartHandler = (item: menuItemType) => {
+    const data: CartType = {
+      email: user?.primaryEmailAddress?.emailAddress as string,
+      productName: item.name,
+      productDescription: item.description,
+      productImage: item.productImage.url,
+      price: item.price,
+      slug: restaurant.slug,
+    }
+    GlobalApi.addToCart(data).then(
+      (resp) => {
+        setUpdateCart(!updateCart)
+        toast({
+          title: 'Product Added Cart',
+          description: 'Product Added Cart Successfully',
+        })
+      },
+      (error) => {
+        toast({
+          title: 'Product Added Cart',
+          description: 'Product Not Added Cart Try Again...',
+        })
+      }
+    )
   }
 
   useEffect(() => {
@@ -55,7 +91,10 @@ const MenuSection = ({ restaurant }: { restaurant: RestaurantDetailsType }) => {
                   <p className="text-sm text-gray-400 line-clamp-2">
                     {menuItem.description}
                   </p>
-                  <SquarePlus />
+                  <SquarePlus
+                    className="cursor-pointer"
+                    onClick={() => addToCartHandler(menuItem)}
+                  />
                 </div>
               </div>
             ))}

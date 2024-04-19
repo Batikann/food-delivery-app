@@ -58,3 +58,17 @@ export type RestaurantDetailsType = {
   slug: string
   workingHours: string
 }
+
+export type CartType = {
+  price: number
+  email: string
+  productDescription: string
+  productImage: string
+  productName: string
+  slug: string
+}
+
+export type CartUpdateContextType = {
+  updateCart: boolean
+  setUpdateCart: (value: boolean) => void
+}
