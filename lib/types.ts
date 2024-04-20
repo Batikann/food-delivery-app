@@ -26,6 +26,11 @@ export type RestaurantItemType = {
   name: string
   restroType: string[]
   workingHours: string
+  reviews: [
+    {
+      star: number
+    }
+  ]
 }
 
 export type MenuSection = {
@@ -74,6 +79,25 @@ export type CartType = {
       url: string
     }
   }
+}
+
+export type AddReviewType = {
+  email: string
+  profileImage: string
+  reviewText: string
+  star: number
+  userName: string
+  slug: string
+}
+
+export type Review = {
+  email: string
+  id: string
+  profileImage: string
+  reviewText: string
+  star: number
+  userName: string
+  updatedAt: string
 }
 
 export type CartUpdateContextType = {

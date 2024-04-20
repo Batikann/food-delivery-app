@@ -1,5 +1,5 @@
 import request, { gql } from 'graphql-request'
-import { CartType } from './types'
+import { AddReviewType, CartType } from './types'
 
 const MASTER_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL as string
 
@@ -42,9 +42,11 @@ const GetShops = async (category: String) => {
         restroType
         workingHours
       }
+      reviews {
+        star
+      }
     }
   `
-
   const result = await request(MASTER_URL, query)
   return result
 }
@@ -83,6 +85,7 @@ const GetRestaurantDetails = async (restaurant: string) => {
         slug
         workingHours
         name
+      
       }
     }
   `
@@ -166,6 +169,48 @@ const deleteCartItemFromCart = async (id: string) => {
   return result
 }
 
+const addNewReview = async (data: AddReviewType) => {
+  const query = gql`
+    mutation AddNewReview {
+      createReview(
+        data: {
+          email: "${data.email}"
+          profileImage: "${data.profileImage}"
+          reviewText: "${data.reviewText}"
+          star: ${data.star}
+          userName: "${data.userName}"
+          restaurant: { connect: { slug: "${data.slug}" } }
+        }
+      ) {
+        id
+      }
+      publishManyReviews(to: PUBLISHED) {
+        count
+      }
+    }
+  `
+  const result = await request(MASTER_URL, query)
+  return result
+}
+
+const getReviews = async (slug: string) => {
+  const query = gql`
+    query RestaurantReviews {
+      reviews(where: { restaurant: { slug: "${slug}" } },orderBy: publishedAt_DESC) {
+        email
+        id
+        profileImage
+        reviewText
+        star
+        userName
+        updatedAt
+      }
+    }
+  `
+  const result = await request(MASTER_URL, query)
+  return result
+}
+
 export default {
   GetCategories,
   GetShops,
@@ -174,4 +219,6 @@ export default {
   getUserCart,
   disconnectRestroFromUserCartItem,
   deleteCartItemFromCart,
+  addNewReview,
+  getReviews,
 }

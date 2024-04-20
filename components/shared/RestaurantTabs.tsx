@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { RestaurantDetailsType } from '@/lib/types'
 import MenuSection from './MenuSection'
+import ReviewSection from './ReviewSection'
 
 const RestaurantTabs = ({
   restaurant,
@@ -18,7 +19,9 @@ const RestaurantTabs = ({
         <MenuSection restaurant={restaurant} />
       </TabsContent>
       <TabsContent value="about">Change your password here.</TabsContent>
-      <TabsContent value="reviews">Change your password here.</TabsContent>
+      <TabsContent value="reviews">
+        <ReviewSection restaurant={restaurant} />
+      </TabsContent>
     </Tabs>
   )
 }
