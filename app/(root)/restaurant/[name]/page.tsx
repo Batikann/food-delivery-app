@@ -10,10 +10,12 @@ import { useEffect, useState } from 'react'
 
 const Page = () => {
   const [restaurant, setRestaurant] = useState<RestaurantDetailsType>()
+  const [reviews, setReviews] = useState([])
   const params = usePathname()
   const getRestaurantDetails = (slug: string) => {
     GlobalApi.GetRestaurantDetails(slug).then((res: any) => {
       setRestaurant(res.restaurant)
+      setReviews(res.reviews)
     })
   }
 
@@ -22,7 +24,10 @@ const Page = () => {
   }, [params])
   return (
     <div className="">
-      <Banner restaurant={restaurant as RestaurantDetailsType} />
+      <Banner
+        restaurant={restaurant as RestaurantDetailsType}
+        reviews={reviews}
+      />
       <div className="p-5 md:px-14">
         <RestaurantTabs restaurant={restaurant as RestaurantDetailsType} />
       </div>

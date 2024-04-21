@@ -26,11 +26,7 @@ export type RestaurantItemType = {
   name: string
   restroType: string[]
   workingHours: string
-  reviews: [
-    {
-      star: number
-    }
-  ]
+  reviews: ReviewType[]
 }
 
 export type MenuSection = {
@@ -47,6 +43,10 @@ export type menuItemType = {
   productImage: {
     url: string
   }
+}
+
+export type ReviewType = {
+  star: number
 }
 
 export type RestaurantDetailsType = {

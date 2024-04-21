@@ -1,8 +1,14 @@
 import { RestaurantDetailsType } from '@/lib/types'
+import { calculateRating, calculateReviwsCount } from '@/lib/utils'
 import { Heart, MapPin } from 'lucide-react'
 import Image from 'next/image'
 
-const Banner = ({ restaurant }: { restaurant: RestaurantDetailsType }) => {
+const Banner = ({
+  restaurant,
+  reviews,
+}: {
+  restaurant: RestaurantDetailsType
+}) => {
   return (
     <div className="">
       <div className="h-[450px] relative">
@@ -19,7 +25,9 @@ const Banner = ({ restaurant }: { restaurant: RestaurantDetailsType }) => {
         <h2 className="text-3xl font-bold mt-2">{restaurant?.name}</h2>
         <div className="flex items-start gap-4 mt-2">
           <Image src="/star.png" width={20} height={20} alt="star" />
-          <label className=" text-gray-500">4.5 (56)</label>
+          <label className=" text-gray-500">{`${calculateRating(
+            reviews
+          )}  (${calculateReviwsCount(reviews)})`}</label>
         </div>
         <h2 className="text-gray-500 mt-2 flex items-center gap-2">
           <MapPin />

@@ -85,7 +85,9 @@ const GetRestaurantDetails = async (restaurant: string) => {
         slug
         workingHours
         name
-      
+      }
+      reviews {
+        star
       }
     }
   `

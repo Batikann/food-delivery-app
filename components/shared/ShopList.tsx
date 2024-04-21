@@ -10,6 +10,7 @@ const ShopList = () => {
   const params = useSearchParams()
   const [category, setCategory] = useState('all')
   const [restaurants, setRestaurants] = useState([])
+  const [reviews, setReviews] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const ShopList = () => {
     setLoading(false)
     GlobalApi.GetShops(category_).then((res: any) => {
       setRestaurants(res.restaurants)
+      setReviews(res.reviews)
       setLoading(true)
     })
   }
@@ -39,7 +41,11 @@ const ShopList = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 mt-4">
         {loading ? (
           restaurants.map((restaurant, index) => (
-            <RestaurantItem key={index} restaurant={restaurant} />
+            <RestaurantItem
+              key={index}
+              restaurant={restaurant}
+              reviews={reviews}
+            />
           ))
         ) : (
           <>
