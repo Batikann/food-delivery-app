@@ -1,4 +1,4 @@
-import { RestaurantDetailsType } from '@/lib/types'
+import { RestaurantDetailsType, ReviewType } from '@/lib/types'
 import { calculateRating, calculateReviwsCount } from '@/lib/utils'
 import { Heart, MapPin } from 'lucide-react'
 import Image from 'next/image'
@@ -8,6 +8,7 @@ const Banner = ({
   reviews,
 }: {
   restaurant: RestaurantDetailsType
+  reviews: ReviewType[]
 }) => {
   return (
     <div className="">

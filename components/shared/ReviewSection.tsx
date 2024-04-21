@@ -1,6 +1,6 @@
 'use client'
 
-import { RestaurantDetailsType, Review, ReviewType } from '@/lib/types'
+import { AddReviewType, RestaurantDetailsType, Review } from '@/lib/types'
 import { Textarea } from '../ui/textarea'
 import { Rating, ThinStar } from '@smastrom/react-rating'
 
@@ -37,7 +37,7 @@ const ReviewSection = ({
       reviewText: reviewText,
       slug: restaurant.slug,
     }
-    GlobalApi.addNewReview(data as ReviewType).then((resp) => {
+    GlobalApi.addNewReview(data as AddReviewType).then((resp) => {
       toast({
         title: 'New Review',
         description: 'New Review Added Successfully',
@@ -49,7 +49,7 @@ const ReviewSection = ({
   }
 
   const getReviewList = () => {
-    GlobalApi.getReviews(restaurant?.slug).then((resp) => {
+    GlobalApi.getReviews(restaurant?.slug).then((resp: any) => {
       setReviews(resp.reviews)
     })
   }

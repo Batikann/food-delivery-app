@@ -1,4 +1,4 @@
-import { RestaurantItemType } from '@/lib/types'
+import { RestaurantItemType, ReviewType } from '@/lib/types'
 import { calculateRating } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -8,6 +8,7 @@ const RestaurantItem = ({
   reviews,
 }: {
   restaurant: RestaurantItemType
+  reviews: ReviewType[]
 }) => {
   return (
     <Link

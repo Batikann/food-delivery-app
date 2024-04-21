@@ -3,14 +3,14 @@
 import Banner from '@/components/shared/Banner'
 import RestaurantTabs from '@/components/shared/RestaurantTabs'
 import GlobalApi from '@/lib/GlobalApi'
-import { RestaurantDetailsType } from '@/lib/types'
+import { RestaurantDetailsType, ReviewType } from '@/lib/types'
 
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 const Page = () => {
   const [restaurant, setRestaurant] = useState<RestaurantDetailsType>()
-  const [reviews, setReviews] = useState([])
+  const [reviews, setReviews] = useState<ReviewType[]>([])
   const params = usePathname()
   const getRestaurantDetails = (slug: string) => {
     GlobalApi.GetRestaurantDetails(slug).then((res: any) => {
@@ -26,7 +26,7 @@ const Page = () => {
     <div className="">
       <Banner
         restaurant={restaurant as RestaurantDetailsType}
-        reviews={reviews}
+        reviews={reviews as ReviewType[]}
       />
       <div className="p-5 md:px-14">
         <RestaurantTabs restaurant={restaurant as RestaurantDetailsType} />
