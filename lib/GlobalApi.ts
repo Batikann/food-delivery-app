@@ -1,5 +1,5 @@
 import request, { gql } from 'graphql-request'
-import { AddReviewType, CartType } from './types'
+import { AddReviewType, CartType, OrderType } from './types'
 
 const MASTER_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL as string
 
@@ -213,6 +213,60 @@ const getReviews = async (slug: string) => {
   return result
 }
 
+const createNewOrder = async (data: OrderType) => {
+  const query = gql`
+    mutation CreateNewOrder {
+      createOrder(
+        data: {
+          email: "${data.email}"
+          userName: "${data.userName}"
+          restaurantName: "${data.restaurantName}"
+          orderAmount: ${data.orderAmount}
+          address: "${data.address}"
+          zipCode: "${data.zipCode}"
+          phone: "${data.phone}"
+        }
+      ) {
+        id
+      }
+    }
+  `
+
+  const result = await request(MASTER_URL, query)
+  return result
+}
+
+const UpdateOrderToAddOrderItems = async (
+  name: string,
+  price: number,
+  id: string,
+  email: string
+) => {
+  const query = gql`
+    mutation MyMutation {
+      updateOrder(
+        data: {
+          orderDetail: {
+            create: { OrderItem: { data: { name: "${name}}", price: ${price} } } }
+          }
+        }
+        where: { id: "${id}" }
+      ) {
+        id
+      }
+      publishManyOrders(to: PUBLISHED) {
+        count
+      }
+      deleteManyUserCarts(where: { email: "${email}" }) {
+        count
+      }
+    }
+  `
+
+  const result = await request(MASTER_URL, query)
+  return result
+}
+
 export default {
   GetCategories,
   GetShops,
@@ -223,4 +277,6 @@ export default {
   deleteCartItemFromCart,
   addNewReview,
   getReviews,
+  createNewOrder,
+  UpdateOrderToAddOrderItems,
 }

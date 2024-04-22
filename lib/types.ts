@@ -104,3 +104,26 @@ export type CartUpdateContextType = {
   updateCart: boolean
   setUpdateCart: (value: boolean) => void
 }
+
+export type OrderType = {
+  email: string
+  userName: string
+  restaurantName: string
+  orderAmount: number
+  address: string
+  zipCode: string
+  phone: string
+}
+
+export type UserInformationForOrder = {
+  name: string
+  email: string
+  phone: string
+  zip: string
+  address: string
+}
+
+export interface CartContextType {
+  updateCart: () => void
+  setUpdateCart: (value: any) => void
+}

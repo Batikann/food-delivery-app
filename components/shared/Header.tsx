@@ -18,6 +18,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import Cart from './Cart'
+import Link from 'next/link'
 
 const Header = () => {
   const [cart, setCart] = useState([])
@@ -29,13 +30,15 @@ const Header = () => {
   }, [updateCart, user])
 
   const getUserCart = (email: string) => {
-    GlobalApi.getUserCart(email).then((resp) => {
+    GlobalApi.getUserCart(email).then((resp: any) => {
       setCart(resp.userCarts)
     })
   }
   return (
     <div className="flex justify-between items-center p-5 md:px-14 border border-b ">
-      <Image src="/logo.svg" width={100} height={120} alt="logo" />
+      <Link href="/">
+        <Image src="/logo.svg" width={100} height={120} alt="logo" />
+      </Link>
       <div className="md:flex hidden border py-2 rounded-lg bg-gray-200 w-96 justify-between px-3">
         <input
           className="bg-transparent outline-none focus:outline-none w-full"

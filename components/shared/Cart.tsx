@@ -4,18 +4,21 @@ import Image from 'next/image'
 import { Button } from '../ui/button'
 import GlobalApi from '@/lib/GlobalApi'
 import { useToast } from '../ui/use-toast'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { CartUpdateContext } from '@/context/CartUpdateContext'
+import Link from 'next/link'
 
 const Cart = ({ cart }: { cart: CartType[] }) => {
   const { toast } = useToast()
   const { updateCart, setUpdateCart } = useContext(CartUpdateContext)
+
   const calculateCartAmount = () => {
     let total = 0
     cart.forEach((item) => {
       total = total + item.price
     })
-    return total.toFixed(2)
+
+    return parseFloat(total.toFixed(2))
   }
 
   const removeItem = (id: string) => {
@@ -58,9 +61,14 @@ const Cart = ({ cart }: { cart: CartType[] }) => {
               />
             </div>
           ))}
-        <Button className="bg-primary">
-          Checkout $ {calculateCartAmount()}
-        </Button>
+        <Link href={`/checkout?restaurant=${cart[0]?.restaurant.slug}`}>
+          <Button
+            disabled={calculateCartAmount() > 0 ? false : true}
+            className="bg-primary w-full"
+          >
+            Checkout $ {calculateCartAmount()}
+          </Button>
+        </Link>
       </div>
     </div>
   )
