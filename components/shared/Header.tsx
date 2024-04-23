@@ -3,6 +3,7 @@ import { Button } from '../ui/button'
 import { Search, ShoppingCart } from 'lucide-react'
 import {
   SignInButton,
+  SignOutButton,
   SignUpButton,
   SignedIn,
   SignedOut,
@@ -19,6 +20,14 @@ import {
 } from '@/components/ui/popover'
 import Cart from './Cart'
 import Link from 'next/link'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 const Header = () => {
   const [cart, setCart] = useState([])
@@ -49,21 +58,49 @@ const Header = () => {
       </div>
       <div className="flex items-center gap-8">
         <SignedIn>
-          <Popover>
-            <PopoverTrigger asChild>
-              <div className="relative cursor-pointer">
-                <span className="absolute -top-3 -right-4 bg-slate-200 text-black font-medium flex p-[2px] px-2  rounded-full text-sm">
-                  {cart && cart.length}
-                </span>
-                <ShoppingCart />
-              </div>
-            </PopoverTrigger>
-            <PopoverContent className="w-full">
-              <Cart cart={cart} />
-            </PopoverContent>
-          </Popover>
+          <div className="flex items-center gap-8">
+            <Popover>
+              <PopoverTrigger asChild>
+                <div className="relative cursor-pointer">
+                  <span className="absolute -top-3 -right-4 bg-slate-200 text-black font-medium flex p-[2px] px-2  rounded-full text-sm">
+                    {cart && cart.length}
+                  </span>
+                  <ShoppingCart />
+                </div>
+              </PopoverTrigger>
+              <PopoverContent className="w-full">
+                <Cart cart={cart} />
+              </PopoverContent>
+            </Popover>
 
-          <UserButton afterSignOutUrl="/" />
+            {/* <UserButton afterSignOutUrl="/" /> */}
+
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Image
+                  src={user?.imageUrl!}
+                  alt="avatar"
+                  width={35}
+                  height={35}
+                  className="rounded-full"
+                />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Link href="/user">Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  {' '}
+                  <Link href="/user#/my-orders">My Orders</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <SignOutButton>Logout</SignOutButton>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </SignedIn>
         <SignedOut>
           <SignInButton mode="modal">

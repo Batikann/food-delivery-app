@@ -267,6 +267,33 @@ const UpdateOrderToAddOrderItems = async (
   return result
 }
 
+const getUserOrders = async (email: string) => {
+  const query = gql`
+    query UserOrders {
+      orders(where: { email: "${email}" } , orderBy: publishedAt_DESC) {
+        id
+        email
+        address
+        phone
+        orderAmount
+        createdAt
+        restaurantName
+        orderDetail {
+          ... on OrderItem {
+            id
+            name
+            price
+          }
+        }
+        zipCode
+        userName
+      }
+    }
+  `
+  const result = await request(MASTER_URL, query)
+  return result
+}
+
 export default {
   GetCategories,
   GetShops,
@@ -279,4 +306,5 @@ export default {
   getReviews,
   createNewOrder,
   UpdateOrderToAddOrderItems,
+  getUserOrders,
 }

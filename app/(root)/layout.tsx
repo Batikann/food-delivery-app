@@ -9,9 +9,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const [updateCart, setUpdateCart] = useState<CartUpdateContextType>()
   return (
     <div>
-      <CartUpdateContext.Provider
-        value={{ updateCart, setUpdateCart } as CartUpdateContextType}
-      >
+      <CartUpdateContext.Provider value={{ updateCart, setUpdateCart }}>
         <Header />
         {children}
       </CartUpdateContext.Provider>

@@ -1,6 +1,6 @@
 'use client'
 
-import { redirect, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -11,7 +11,6 @@ import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -93,7 +92,7 @@ const CheckoutPage = () => {
               resultId,
               user?.primaryEmailAddress?.emailAddress as string
             ).then(
-              (resp) => {
+              async (resp) => {
                 setLoading(false)
                 toast({
                   title: 'Order Added',
@@ -114,9 +113,10 @@ const CheckoutPage = () => {
     )
   }
 
-  function onSubmit(values: z.infer<typeof checkoutFormSchema>) {
+  async function onSubmit(values: z.infer<typeof checkoutFormSchema>) {
     addToOrder(values)
   }
+
   return (
     <div className="p-5 md:px-14 h-screen">
       <h2 className="text-3xl font-bold">CheckOut</h2>

@@ -106,6 +106,7 @@ export type CartUpdateContextType = {
 }
 
 export type OrderType = {
+  id: string
   email: string
   userName: string
   restaurantName: string
@@ -126,4 +127,23 @@ export type UserInformationForOrder = {
 export interface CartContextType {
   updateCart: () => void
   setUpdateCart: (value: any) => void
+}
+
+export type OrderList = {
+  id: string
+  email: string
+  address: string
+  phone: string
+  orderAmount: number
+  createdAt: string
+  restaurantName: string
+  zipCode: string
+  userName: string
+  orderDetail: OrderDetail[]
+}
+
+type OrderDetail = {
+  id: string
+  name: string
+  price: number
 }
