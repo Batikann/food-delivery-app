@@ -1,40 +1,44 @@
 <h1>Food Delivery App</h1>
-<a href="[https://evently-woad-xi.vercel.app/](https://food-delivery-app-pi-eight.vercel.app/)" target="_blank">Project Live</a>
+<a href="https://food-delivery-app-pi-eight.vercel.app" target="_blank">Project Live</a>
 <h2>Projenin Amacı / The Objective of the Project</h2>
 
 <span>TR</span>
-<p>Kullanıcı siteye üye olabilir ve giriş yapabilir.Giriş yaptıktan sonra kendisi bir etkinlik oluşturabilir (ücretli veya ücretsiz) veya olan etkinliklere katılabilir.Eğer ücretli bir etkinliğe katılamak isterse ücretini ödeyip o etkinliğe katılabilir.Kullanıcı panelinden kullanıcı katılıdığı veya kendisinin oluşturmuş olduğu etkinlikleri görebilir.</p>
+<p>Kullanıcıların istedikleri restorandan istedikleri siparişi verebilmelerini sağlayan bir proje geliştirdim. Bu projede yönetim işlemlerini kolaylaştırmak için Hygraph adlı headless CMS'i kullandım. Hygraph'u tercih etmemin temel sebeplerinden biri, bize 1 milyon API isteğine kadar olanak sağlaması ve içerik yönetimini son derece kolaylaştırması oldu.</p>
 
 <span>ENG</span>
-<p>Users can register and log in to the site. After logging in, they can create an event themselves (paid or free) or join existing events. If they want to participate in a paid event, they can pay the fee and join the event. Users can view the events they have attended or created from their user panel."</p>
+<p>I developed a project that allows users to place orders from their desired restaurants. To facilitate management tasks in this project, I utilized a headless CMS called Hygraph. One of the primary reasons for choosing Hygraph was its capability to accommodate up to 1 million API requests and its seamless content management, which greatly simplified our operations.</p>
 
 <h3>Kullanılan Teknolojiler / The Technologies Used</h3>
 <ul>
   <li>Nextjs 14</li>
   <li>Clerk</li>
   <li>TailwindCSS</li>
-  <li>Stripe</li>
   <li>Typescript</li>
-  <li>Uploadthing</li>
   <li>Shadcn UI</li>
-  <li>MongoDB</li>
-
+  <li>Hygraph</li>
+  <li>GraphQL</li>
 </ul>
 
 <h3>Proje Görselleri</h3>
 
 
 <h4>Kullanıcı Giriş Yapmadan Önce / Before User Log-in</h4>
-<img src="https://github.com/Batikann/evently/assets/71382413/9efe5ca7-5fcf-4113-ad8c-b36aa942dbc3" />
+<img src="https://github.com/Batikann/food-delivery-app/assets/71382413/e355986f-4f36-4a5b-b16b-a56f72d5ecbc" />
 
 
 <h4>Kullanıcı Giriş Yaptıktan Sonra / After User Log-in</h4>
-<img src="https://github.com/Batikann/evently/assets/71382413/5b5e9036-ab14-4bd9-b99d-f5f80d420fc6"/>
+<img src="https://github.com/Batikann/food-delivery-app/assets/71382413/24814446-f030-49d4-b74d-ed6b31fc5199"/>
 
-<h4>Event Oluşturma / Creating an Event</h4>
-<img src="https://github.com/Batikann/evently/assets/71382413/530ea405-397e-4b24-b805-a9858507fdbd"/>
+<h4>Restorant Detay Sayfası / Restaurant Detail Page</h4>
 
-<h4>Kullanıcı Paneli / User Panel</h4>
-<img src="https://github.com/Batikann/evently/assets/71382413/f5e576a3-9af9-4f12-9d3d-e1e6960eafa2"/>
+<img src="https://github.com/Batikann/food-delivery-app/assets/71382413/28322c36-6944-489f-bf31-c06f6832f4f5"/>
+
+<h4>Ödeme Sayfası / Checkout Page</h4>
+
+<img src="https://github.com/Batikann/food-delivery-app/assets/71382413/0dffeec0-a4fb-4131-9e50-0053ee2b627c"/>
+
+<h4>Siparişlerim Sayfası / My Orders Page</h4>
+
+<img src="https://github.com/Batikann/food-delivery-app/assets/71382413/b395ffb5-6312-40f6-8af5-10ae4822f3fd"/>
 
 
