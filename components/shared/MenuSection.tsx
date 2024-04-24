@@ -2,7 +2,7 @@
 
 import {
   CartType,
-  MenuSection,
+  MenuSection as MenuSectionType,
   RestaurantDetailsType,
   menuItemType,
 } from '@/lib/types'
@@ -17,14 +17,15 @@ import { CartUpdateContext } from '@/context/CartUpdateContext'
 
 const MenuSection = ({ restaurant }: { restaurant: RestaurantDetailsType }) => {
   const { toast } = useToast()
-  const [menuItemList, setMenuList] = useState<MenuSection[]>([])
+  const [menuItemList, setMenuList] = useState<MenuSectionType[]>([])
+
   const { user } = useUser()
   const { updateCart, setUpdateCart } = useContext(CartUpdateContext)
   const filterMenu = (category: string) => {
     const result = restaurant?.menu?.filter(
       (item) => item?.category === category
     )
-    setMenuList(result)
+    setMenuList(result as any)
   }
 
   const addToCartHandler = (item: menuItemType) => {

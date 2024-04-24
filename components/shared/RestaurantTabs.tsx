@@ -18,7 +18,7 @@ const RestaurantTabs = ({
       <TabsContent value="category">
         <MenuSection restaurant={restaurant} />
       </TabsContent>
-      <TabsContent value="about">Change your password here.</TabsContent>
+      <TabsContent value="about">{restaurant?.aboutUs}</TabsContent>
       <TabsContent value="reviews">
         <ReviewSection restaurant={restaurant} />
       </TabsContent>

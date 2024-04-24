@@ -65,14 +65,14 @@ export type RestaurantDetailsType = {
 }
 
 export type CartType = {
-  id: string
+  id?: string
   price: number
   email: string
   productDescription: string
   productImage: string
   productName: string
   slug: string
-  restaurant: {
+  restaurant?: {
     name: string
     slug: string
     banner: {
@@ -124,11 +124,6 @@ export type UserInformationForOrder = {
   address: string
 }
 
-export interface CartContextType {
-  updateCart: () => void
-  setUpdateCart: (value: any) => void
-}
-
 export type OrderList = {
   id: string
   email: string
@@ -146,4 +141,9 @@ type OrderDetail = {
   id: string
   name: string
   price: number
+}
+
+export type CartContextType = {
+  updateCart: CartType
+  setUpdateCart: React.Dispatch<React.SetStateAction<CartType>>
 }

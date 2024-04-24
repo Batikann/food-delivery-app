@@ -6,7 +6,7 @@ const MASTER_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL as string
 const GetCategories = async () => {
   const query = gql`
     query Categories {
-      categories(first: 10) {
+      categories(first: 50) {
         id
         name
         slug
@@ -41,9 +41,6 @@ const GetShops = async (category: String) => {
         name
         restroType
         workingHours
-      }
-      reviews {
-        star
       }
     }
   `
@@ -86,7 +83,7 @@ const GetRestaurantDetails = async (restaurant: string) => {
         workingHours
         name
       }
-      reviews {
+      reviews(where: { restaurant: { slug: "${restaurant}" } }) {
         star
       }
     }
@@ -294,6 +291,20 @@ const getUserOrders = async (email: string) => {
   return result
 }
 
+const getRestaruantReviews = async (slug: string) => {
+  const query = gql`
+    query RestaruantReviews {
+      restaurant(where: { slug: "${slug}" }) {
+        reviews {
+          star
+        }
+      }
+    }
+  `
+  const result = await request(MASTER_URL, query)
+  return result
+}
+
 export default {
   GetCategories,
   GetShops,
@@ -307,4 +318,5 @@ export default {
   createNewOrder,
   UpdateOrderToAddOrderItems,
   getUserOrders,
+  getRestaruantReviews,
 }

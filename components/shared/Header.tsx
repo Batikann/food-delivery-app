@@ -7,7 +7,6 @@ import {
   SignUpButton,
   SignedIn,
   SignedOut,
-  UserButton,
   useUser,
 } from '@clerk/nextjs'
 import { useContext, useEffect, useState } from 'react'

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Button } from '../ui/button'
 import GlobalApi from '@/lib/GlobalApi'
 import { useToast } from '../ui/use-toast'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { CartUpdateContext } from '@/context/CartUpdateContext'
 import Link from 'next/link'
 
@@ -37,7 +37,7 @@ const Cart = ({ cart }: { cart: CartType[] }) => {
 
   return (
     <div>
-      <h2 className="text-lg font-bold">{cart[0]?.restaurant.name}</h2>
+      <h2 className="text-lg font-bold">{cart[0]?.restaurant?.name}</h2>
       <div className="mt-5 flex flex-col gap-3">
         <h2 className="font-bold">My Order</h2>
         {cart &&
@@ -56,12 +56,12 @@ const Cart = ({ cart }: { cart: CartType[] }) => {
               <h2 className=" text-sm line-clamp-2">{item.productName}</h2>
               <p className="font-bold ">$ {item.price}</p>
               <X
-                onClick={() => removeItem(item.id)}
+                onClick={() => removeItem(item.id as string)}
                 className="cursor-pointer  text-primary"
               />
             </div>
           ))}
-        <Link href={`/checkout?restaurant=${cart[0]?.restaurant.slug}`}>
+        <Link href={`/checkout?restaurant=${cart[0]?.restaurant?.slug}`}>
           <Button
             disabled={calculateCartAmount() > 0 ? false : true}
             className="bg-primary w-full"
