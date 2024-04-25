@@ -6,9 +6,12 @@ import { useState } from 'react'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [updateCart, setUpdateCart] = useState()
+  const [filterQuery, setFilterQuery] = useState<string>('')
   return (
     <div>
-      <CartUpdateContext.Provider value={{ updateCart, setUpdateCart }}>
+      <CartUpdateContext.Provider
+        value={{ updateCart, setUpdateCart, filterQuery, setFilterQuery }}
+      >
         <Header />
         {children}
       </CartUpdateContext.Provider>

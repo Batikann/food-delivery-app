@@ -103,6 +103,8 @@ export type Review = {
 export type CartUpdateContextType = {
   updateCart: boolean
   setUpdateCart: (value: boolean) => void
+  filterQuery: string
+  setFilterQuery: (value: string) => void
 }
 
 export type OrderType = {

@@ -21,10 +21,12 @@ const GetCategories = async () => {
   return result
 }
 
-const GetShops = async (category: String) => {
+const GetShops = async (category: String, name?: String) => {
   const query = gql`
     query GetShops {
-      restaurants(where: { categories_some: { slug: "${category}" } }) {
+      restaurants(
+        where: { categories_some: { slug: "${category}" }, name_contains: "${name}" }
+      ) {
         aboutUs
         address
         categories {
@@ -298,6 +300,23 @@ const getRestaruantReviews = async (slug: string) => {
         reviews {
           star
         }
+      }
+    }
+  `
+  const result = await request(MASTER_URL, query)
+  return result
+}
+
+const searchRestaurant = async (slug: string) => {
+  const query = gql`
+    query MyQuery {
+      restaurant(where: { slug: "${slug}" }) {
+        id
+        name
+        publishedAt
+        restroType
+        updatedAt
+        workingHours
       }
     }
   `

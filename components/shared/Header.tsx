@@ -31,7 +31,8 @@ import {
 const Header = () => {
   const [cart, setCart] = useState([])
   const { user } = useUser()
-  const { updateCart, setUpdateCart } = useContext(CartUpdateContext)
+  const { updateCart, setUpdateCart, setFilterQuery } =
+    useContext(CartUpdateContext)
 
   useEffect(() => {
     user && getUserCart(user.primaryEmailAddress?.emailAddress as string)
@@ -52,6 +53,7 @@ const Header = () => {
           className="bg-transparent outline-none focus:outline-none w-full"
           type="text"
           placeholder="search food"
+          onChange={(e) => setFilterQuery(e.target.value)}
         />
         <Search size={20} className="cursor-pointer" />
       </div>

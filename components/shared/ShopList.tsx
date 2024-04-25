@@ -2,30 +2,31 @@
 
 import GlobalApi from '@/lib/GlobalApi'
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import RestaurantItem from './RestaurantItem'
 import RestaurantSkeletonItem from './RestaurantItemSkeleton'
+import { CartUpdateContext } from '@/context/CartUpdateContext'
 
 const ShopList = () => {
   const params = useSearchParams()
   const [category, setCategory] = useState('all')
   const [restaurants, setRestaurants] = useState([])
-
+  const { filterQuery } = useContext(CartUpdateContext)
   const [loading, setLoading] = useState(true)
 
-  const getShopList = (category_: String) => {
+  const getShopList = (category_: string, name?: string) => {
     setLoading(false)
-    GlobalApi.GetShops(category_ ?? 'all').then((res: any) => {
+    const category = category_ ?? 'all'
+    GlobalApi.GetShops(category, name).then((res: any) => {
       setRestaurants(res.restaurants)
-
       setLoading(true)
     })
   }
 
   useEffect(() => {
     params && setCategory(params.get('category') as string)
-    params && getShopList(params.get('category') as string)
-  }, [params])
+    params && getShopList(params.get('category') as string, filterQuery)
+  }, [params, filterQuery])
 
   if (!loading) {
     return (
